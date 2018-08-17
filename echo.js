@@ -66,7 +66,7 @@ server.on('connection', (socket) => {
             }
             readBuffer = readBuffer.slice(eol + delimLength + 1);
 
-            socket.write(frame);
+            if (socket.writable) socket.write(frame);
         } else {
             const length = readBuffer.length;
             if (length > MAX_LENGTH) {
