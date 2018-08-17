@@ -107,8 +107,11 @@ server.listen(PORT, HOST);
 
 setInterval(() => {
     server.getConnections((err, connections) => {
-        let now = (new Date()).toUTCString();
-        if (!err) console.log(`[${now}] 连接数为：${connections}，最大连接数为：${server.maxConnections}`);
+        if (!err) {
+            const now = (new Date()).toUTCString();
+            const memoryUsage = JSON.stringify(process.memoryUsage());
+            console.log(`[${now}] 连接数为：${connections}，最大连接数为：${server.maxConnections}，内存使用：${memoryUsage}`);
+        }
     });
 }, 2000);
 
